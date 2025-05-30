@@ -10,6 +10,7 @@ import {
   deleteProject,
 } from "../controllers/resume.controller.js";
 import { uploadResumeFile } from "../controllers/uploadResumeFile.controller.js";
+import { exportResumeToPDFAndUpload } from "../controllers/exportResume.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 
@@ -35,5 +36,10 @@ router.post(
   upload.single("resumeFile"), // expecting form field name = resumeFile
   uploadResumeFile
 );
+
+//export resume to pdf and upload
+router
+  .route("/export-resume/:resumeId")
+  .post(verifyJWT, exportResumeToPDFAndUpload);
 
 export default router;

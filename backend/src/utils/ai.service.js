@@ -23,5 +23,7 @@ Respond with a modified resume in bullet points or markdown.
     messages: [{ role: "user", content: prompt }],
   });
 
+  console.log(completion); // check what openAI returns
+
   return completion.choices[0].message.content;
 };

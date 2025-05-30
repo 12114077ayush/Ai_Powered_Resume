@@ -5,6 +5,9 @@ import { Resume } from "../models/resume.model.js";
 
 const createResume = asyncHandler(async (req, res) => {
   const {
+    fullName,
+    email,
+    phone,
     title,
     summary,
     skills,
@@ -15,12 +18,15 @@ const createResume = asyncHandler(async (req, res) => {
     sourceJobDescription,
   } = req.body;
 
-  if (!title) {
+  if (!(title && email && phone && fullName)) {
     throw new ApiError(400, "Title Field is required");
   }
 
   const resume = await Resume.create({
     user: req.user._id,
+    fullName,
+    email,
+    phone,
     title,
     summary,
     skills,
@@ -71,7 +77,17 @@ const getResumeById = asyncHandler(async (req, res) => {
 });
 
 const updateResume = asyncHandler(async (req, res) => {
-  const { title, summary, education, experience, skills, projects } = req.body;
+  const {
+    fullName,
+    email,
+    phone,
+    title,
+    summary,
+    education,
+    experience,
+    skills,
+    projects,
+  } = req.body;
 
   const resume = await Resume.findOne({
     _id: req.params.id,
@@ -82,6 +98,9 @@ const updateResume = asyncHandler(async (req, res) => {
     throw new ApiError(404, "Resume not found");
   }
 
+  if (fullName !== undefined) resume.fullName = fullName;
+  if (email !== undefined) resume.email = email;
+  if (phone !== undefined) resume.phone = phone;
   if (title !== undefined) resume.title = title;
   if (summary !== undefined) resume.summary = summary;
   if (education !== undefined) resume.education = education;

@@ -3,7 +3,9 @@ import mongoose, { Schema } from "mongoose";
 const resumeSchema = new Schema(
   {
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-
+    fullName: { type: String, required: true },
+    email: { type: String, required: true },
+    phone: { type: String },
     title: { type: String, required: true }, // eg. "Frontend Developer Resume"
     summary: { type: String },
     skills: [String],

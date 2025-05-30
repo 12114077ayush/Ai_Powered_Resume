@@ -1,7 +1,7 @@
 import { Resume } from "../models/resume.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-
+import { generateResumeFromJD } from "../utils/ai.service.js";
 const generateSmartResume = async (req, res) => {
   const { jobDescription, resumeId } = req.body;
 

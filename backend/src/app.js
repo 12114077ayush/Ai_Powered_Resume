@@ -15,6 +15,7 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true, limit: "16kb" })); // here we config to get data from URL.
 app.use(express.static("public"));
+app.use(cookieParser()); //to perform CRED operations in user browser.
 
 //import routes
 import userRouter from "./routes/user.routes.js";
